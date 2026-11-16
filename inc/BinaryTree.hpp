@@ -1,7 +1,6 @@
 #ifndef BINARY_TREE_HPP
 #define BINARY_TREE_HPP
 
-
 #include <iostream>
 #include <sstream>
 
@@ -25,9 +24,9 @@ public:
   void postOrder(std::ostringstream& out);
   int nodeCount();
   Node<Type>* find(Type item);
-  Node<Type>* findRightMostNode(Node<Type>* find);
+  Node<Type>* findRightMostNode(Node<Type>* curr);
   void remove(Type item);
-  int  height();
+  int height();
   int leavesCount();
 
 protected:
@@ -79,6 +78,7 @@ BinaryTree<Type>& BinaryTree<Type>::operator=(const BinaryTree<Type>& b) {
   return *this;
 }
 
+// Deletes all nodes in post-order to clean up memory
 template <typename Type>
 void BinaryTree<Type>::destroy(Node<Type>* curr) {
   if (curr != nullptr) {
@@ -243,6 +243,7 @@ Node<Type>* BinaryTree<Type>::remove(Type item, Node<Type>* curr) {
   } else if (item > curr->item) {
     curr->right = remove(item, curr->right);
   } else {
+    // 0 or 1 child
     if (curr->left == nullptr) {
       Node<Type>* temp = curr->right;
       delete curr;
@@ -252,6 +253,7 @@ Node<Type>* BinaryTree<Type>::remove(Type item, Node<Type>* curr) {
       delete curr;
       return temp;
     } else {
+      // 2 children: replace with largest node in left subtree
       Node<Type>* rightMost = findRightMostNode(curr->left);
       curr->item = rightMost->item;
       curr->left = remove(rightMost->item, curr->left);
@@ -260,6 +262,7 @@ Node<Type>* BinaryTree<Type>::remove(Type item, Node<Type>* curr) {
   return curr;
 }
 
+// Empty tree has height -1, single node has height 0
 template <typename Type>
 int BinaryTree<Type>::height() {
   if (root == nullptr) {
@@ -280,6 +283,5 @@ int BinaryTree<Type>::height(int level, Node<Type>* curr) {
   }
   return rightH;
 }
-
 
 #endif // BINARY_TREE_HPP

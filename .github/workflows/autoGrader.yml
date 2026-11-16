@@ -14,7 +14,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Setup dependencies
-      run: sudo apt-get install -y g++
+      run: |
+        sudo apt-get install -y g++-10
+        sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 10
         
     - name: install_valgrind
       run: sudo apt install -y valgrind

@@ -280,4 +280,5 @@ int BinaryTree<Type>::height(int level, Node<Type>* curr) {
   return rightH;
 }
 
+
 #endif // BINARY_TREE_HPP

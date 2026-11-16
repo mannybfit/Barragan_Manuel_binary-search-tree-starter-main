@@ -1,8 +1,9 @@
 #ifndef BINARY_TREE_HPP
 #define BINARY_TREE_HPP
 
-#include <sstream>
+
 #include <iostream>
+#include <sstream>
 
 template <typename Type>
 struct Node {

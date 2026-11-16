@@ -14,9 +14,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Setup dependencies
-      run: |
-          sudo apt-get install -y g++
-          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 100
+      run: sudo apt-get install -y g++
+        
     - name: install_valgrind
       run: sudo apt install -y valgrind
     - name: cmake
